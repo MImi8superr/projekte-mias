@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mias | Portfolio Informatiker-Lehre</title>
+
+  <style>
+    :root {
+      --bg: #0f172a;
+      --bg-light: #111827;
+      --card: #1e293b;
+      --accent: #38bdf8;
+      --accent-2: #a78bfa;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --line: rgba(255, 255, 255, 0.12);
+      --radius: 18px;
+      --shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(56, 189, 248, 0.18), transparent 35%),
+        radial-gradient(circle at top right, rgba(167, 139, 250, 0.18), transparent 35%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1100px, 92%);
+      margin: 0 auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(18px);
+      background: rgba(15, 23, 42, 0.75);
+      border-bottom: 1px solid var(--line);
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 0;
+    }
+
+    .logo {
+      font-weight: 800;
+      letter-spacing: 0.5px;
+    }
+
+    .logo span {
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .hero {
+      padding: 95px 0 70px;
+      display: grid;
+      grid-template-columns: 1.4fr 0.8fr;
+      gap: 34px;
+      align-items: center;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      margin-bottom: 20px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.04);
+      font-size: 0.9rem;
+    }
+
+    .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 18px #22c55e;
+    }
+
+    h1 {
+      font-size: clamp(2.4rem, 6vw, 5rem);
+      line-height: 1.05;
+      margin-bottom: 22px;
+      letter-spacing: -2px;
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 1.12rem;
+      max-width: 650px;
+      margin-bottom: 28px;
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .button {
+      padding: 13px 18px;
+      border-radius: 999px;
+      font-weight: 700;
+      transition: 0.2s ease;
+      border: 1px solid var(--line);
+    }
+
+    .button.primary {
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      color: #020617;
+      border: none;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+
+    .profile-card {
+      background: rgba(30, 41, 59, 0.8);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 26px;
+      box-shadow: var(--shadow);
+    }
+
+    .profile-icon {
+      width: 72px;
+      height: 72px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 20px;
+      border-radius: 22px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #020617;
+      font-size: 2rem;
+      font-weight: 900;
+    }
+
+    .profile-card h2 {
+      margin-bottom: 10px;
+    }
+
+    .profile-card p {
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    .quick-facts {
+      display: grid;
+      gap: 10px;
+    }
+
+    .fact {
+      padding: 12px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--muted);
+    }
+
+    .fact strong {
+      color: var(--text);
+    }
+
+    section {
+      padding: 70px 0;
+    }
+
+    .section-title {
+      margin-bottom: 12px;
+      font-size: 2rem;
+      letter-spacing: -1px;
+    }
+
+    .section-subtitle {
+      color: var(--muted);
+      margin-bottom: 34px;
+      max-width: 720px;
+    }
+
+    /* ================================
+       Projekte
+       ================================ */
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .project-card {
+      background: rgba(30, 41, 59, 0.78);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 22px;
+      transition: 0.2s ease;
+      min-height: 250px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .project-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(56, 189, 248, 0.55);
+      box-shadow: var(--shadow);
+    }
+
+    .project-card h3 {
+      margin-bottom: 8px;
+      font-size: 1.25rem;
+    }
+
+    .project-card p {
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .tag {
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(56, 189, 248, 0.12);
+      color: #bae6fd;
+      font-size: 0.82rem;
+    }
+
+    .project-link {
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .project-link:hover {
+      text-decoration: underline;
+    }
+
+
+       /*Timeline*/
+    
+    .timeline {
+      position: relative;
+      display: grid;
+      gap: 18px;
+      padding-left: 24px;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 6px;
+      top: 8px;
+      bottom: 8px;
+      width: 2px;
+      background: linear-gradient(var(--accent), var(--accent-2));
+    }
+
+    .timeline-item {
+      position: relative;
+      background: rgba(30, 41, 59, 0.78);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 20px;
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -25px;
+      top: 25px;
+      width: 14px;
+      height: 14px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 20px var(--accent);
+    }
+
+    .timeline-date {
+      color: var(--accent);
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+
+    .timeline-item p {
+      color: var(--muted);
+    }
+
+    footer {
+      padding: 30px 0;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 850px) {
+      .hero {
+        grid-template-columns: 1fr;
+        padding-top: 65px;
+      }
+
+      .project-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <a href="#top" class="logo">Mias<span>.</span>Portfolio</a>
+        <div class="nav-links">
+          <a href="#projekte">Projekte</a>
+          <a href="#timeline">Timeline</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <div class="container hero">
+      <div>
+        <div class="badge"><span class="dot"></span> Bewerbung für eine Informatiker-Lehre</div>
+        <h1>Hallo, ich bin <span class="gradient-text">Mias</span>.</h1>
+        <p>
+          Ich interessiere mich für Programmieren, Games, Apps und Technik. Auf dieser Website sammle ich meine Projekte,
+          damit man schnell sieht, womit ich mich bereits beschäftigt habe.
+        </p>
+        <div class="buttons">
+          <a class="button primary" href="#projekte">Meine Projekte ansehen</a>
+        </div>
+      </div>
+
+      <aside class="profile-card">
+        <div class="profile-icon">&lt;/&gt;</div>
+        <h2>Über mich</h2>
+        <p>
+          Ich probiere gerne neue Tools aus, entwickle eigene kleine Spiele und lerne Schritt für Schritt mehr über Softwareentwicklung.
+        </p>
+        <div class="quick-facts">
+          <div class="fact"><strong>Interesse:</strong> Informatik & Game Development</div>
+          <div class="fact"><strong>Tools:</strong> Scratch, Roblox Studio, Thunkable, HTML</div>
+          <div class="fact"><strong>Ziel:</strong> Lehrstelle als Informatiker</div>
+        </div>
+      </aside>
+    </div>
+
+    <section id="projekte">
+      <div class="container">
+        <h2 class="section-title">Projekte</h2>
+        <p class="section-subtitle">
+          Hier kannst du Links zu deinen Projekten einfügen. Ersetze einfach die Beispiel-Links mit deinen echten Links.
+        </p>
+
+        <div class="project-grid">
+          <!-- Projekt 1 -->
+          <article class="project-card">
+            <div>
+              <h3>Scratch-Projekte</h3>
+              <p>Kleine Spiele und Experimente, mit denen ich Programmierlogik und Abläufe gelernt habe.</p>
+              <div class="tags">
+                <span class="tag">Scratch</span>
+                <span class="tag">Games</span>
+                <span class="tag">Logik</span>
+              </div>
+            </div>
+            <a class="project-link" href="https://scratch.mit.edu/" target="_blank">Projekt öffnen →</a>
+          </article>
+
+          <!-- Projekt 2 -->
+          <article class="project-card">
+            <div>
+              <h3>Roblox Studio</h3>
+              <p>Eigene Roblox-Games, Scripts und Spielideen mit Lua, UI, Coins, Pets oder Tycoon-Systemen.</p>
+              <div class="tags">
+                <span class="tag">Roblox Studio</span>
+                <span class="tag">Lua</span>
+                <span class="tag">Game Design</span>
+              </div>
+            </div>
+            <a class="project-link" href="#" target="_blank">Link einfügen →</a>
+          </article>
+
+          <!-- Projekt 3 -->
+          <article class="project-card">
+            <div>
+              <h3>Thunkable Apps</h3>
+              <p>Mobile App-Ideen und Prototypen, die direkt auf dem Handy getestet werden können.</p>
+              <div class="tags">
+                <span class="tag">Thunkable</span>
+                <span class="tag">Apps</span>
+                <span class="tag">Mobile</span>
+              </div>
+            </div>
+            <a class="project-link" href="#" target="_blank">Link einfügen →</a>
+          </article>
+
+          <!-- Projekt 4 -->
+          <article class="project-card">
+            <div>
+              <h3>VibeCoded Games</h3>
+              <p>Games und Prototypen, die ich mit Hilfe von modernen Coding-Tools geplant und umgesetzt habe.</p>
+              <div class="tags">
+                <span class="tag">HTML</span>
+                <span class="tag">JavaScript</span>
+                <span class="tag">Prototyping</span>
+              </div>
+            </div>
+            <a class="project-link" href="#" target="_blank">Link einfügen →</a>
+          </article>
+
+          <!-- Projekt 5 -->
+          <article class="project-card">
+            <div>
+              <h3>Eigene Website</h3>
+              <p>Diese Portfolio-Website ist ebenfalls ein Projekt und zeigt, dass ich HTML und CSS anwenden kann.</p>
+              <div class="tags">
+                <span class="tag">HTML</span>
+                <span class="tag">CSS</span>
+                <span class="tag">Portfolio</span>
+              </div>
+            </div>
+            <a class="project-link" href="#top">Nach oben →</a>
+          </article>
+
+          <!-- Projekt 6 -->
+          <article class="project-card">
+            <div>
+              <h3>Weiteres Projekt</h3>
+              <p>Hier kannst du später ein neues Projekt hinzufügen, zum Beispiel GitHub, Unity, Flutter oder eine App.</p>
+              <div class="tags">
+                <span class="tag">Neu</span>
+                <span class="tag">Idee</span>
+                <span class="tag">Lernen</span>
+              </div>
+            </div>
+            <a class="project-link" href="#" target="_blank">Link einfügen →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="timeline">
+      <div class="container">
+        <h2 class="section-title">Meine Coding-Timeline</h2>
+        <p class="section-subtitle">
+          Eine kurze Übersicht, wie sich meine Projekte und Interessen entwickelt haben.
+        </p>
+
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-date">2021 – 2025</div>
+            <h3>Scratch</h3>
+            <p>Erste eigene Projekte, einfache Spiele und Grundlagen wie Bedingungen, Schleifen und Variablen.</p>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-date">2024 – heute</div>
+            <h3>Roblox Studio</h3>
+            <p>Eigene Spielideen, Lua-Scripts, Systeme für Coins, Pets, Tycoons und kleine Game-Mechaniken.</p>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-date">2025 – heute</div>
+            <h3>VibeCoded Games</h3>
+            <p>Prototypen und kleine Games mit modernen Coding-Workflows, HTML, CSS und JavaScript.</p>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-date">2026</div>
+            <h3>Thunkable Handy-Apps</h3>
+            <p>Mobile Apps und App-Prototypen, um Ideen schnell auf dem Smartphone auszuprobieren.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      Mias 2026
+    </div>
+  </footer>
+</body>
+</html>
